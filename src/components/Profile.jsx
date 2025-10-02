@@ -10,6 +10,8 @@ const Profile = ({ user, onLogout }) => {
   const [copied, setCopied] = useState(false);
   const [error, setError] = useState('');
 
+  const BACKEND_API = import.meta.env.VITE_BACKEND_API || 'http://localhost:3000';
+
   useEffect(() => {
     fetchProfile();
   }, []);
@@ -17,7 +19,7 @@ const Profile = ({ user, onLogout }) => {
   const fetchProfile = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:3000/api/profile', {
+      const response = await fetch(`${BACKEND_API}/api/profile`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -46,7 +48,7 @@ const Profile = ({ user, onLogout }) => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:3000/api/profile/update-github', {
+      const response = await fetch(`${BACKEND_API}/api/profile/update-github`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -78,7 +80,7 @@ const Profile = ({ user, onLogout }) => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:3000/api/profile/refresh-contributions', {
+      const response = await fetch(`${BACKEND_API}/api/profile/refresh-contributions`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`

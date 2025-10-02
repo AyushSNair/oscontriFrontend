@@ -13,6 +13,8 @@ const Signup = ({ onSwitchToLogin, onSignupSuccess }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
+  const BACKEND_API = import.meta.env.VITE_BACKEND_API || 'http://localhost:3000';
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -41,7 +43,7 @@ const Signup = ({ onSwitchToLogin, onSignupSuccess }) => {
     }
 
     try {
-      const response = await fetch('http://localhost:3000/api/auth/signup', {
+      const response = await fetch(`${BACKEND_API}/api/auth/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

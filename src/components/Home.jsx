@@ -20,6 +20,7 @@ const Home = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
 
+  const BACKEND_API = import.meta.env.VITE_BACKEND_API || 'http://localhost:3000';
   const GITHUB_API = import.meta.env.VITE_GITHUB_API || 'https://api.github.com';
   const GITHUB_TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
   
@@ -39,7 +40,7 @@ const Home = () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:3000/api/repositories/search?q=${encodeURIComponent(query)}&sort=${sort}&order=desc&per_page=30&page=${page}`);
+      const response = await fetch(`${BACKEND_API}/api/repositories/search?q=${encodeURIComponent(query)}&sort=${sort}&order=desc&per_page=30&page=${page}`);
       
       if (!response.ok) {
         const errorData = await response.json();

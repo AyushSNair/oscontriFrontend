@@ -6,13 +6,15 @@ const PublicProfile = ({ profileUrl, onBack }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
+  const BACKEND_API = import.meta.env.VITE_BACKEND_API || 'http://localhost:3000';
+
   useEffect(() => {
     fetchPublicProfile();
   }, [profileUrl]);
 
   const fetchPublicProfile = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/api/profile/${profileUrl}`);
+      const response = await fetch(`${BACKEND_API}/api/profile/${profileUrl}`);
       
       if (response.ok) {
         const data = await response.json();
